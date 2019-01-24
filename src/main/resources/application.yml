@@ -1,0 +1,12 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /springboot
+spring:
+  mvc:
+    view:
+      prefix: /templates/
+      suffix: .html
+  thymeleaf:
+    prefix: classpath:/templates/
+    cache: false
