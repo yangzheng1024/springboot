@@ -10,3 +10,18 @@ spring:
   thymeleaf:
     prefix: classpath:/templates/
     cache: false
+    #   LEGACYHTML5(可以得到一个可能更友好亲切的格式要求。需要搭配一个额外的库才可以用可看pom文件中的nekoHtml) 和 HTML5(是一个很严格的检查)
+    mode: LEGACYHTML5
+    encoding: utf-8
+    servlet:
+      content-type: text/html
+  jpa:
+    database: MYSQL
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:mysql://localhost:3306/test?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver

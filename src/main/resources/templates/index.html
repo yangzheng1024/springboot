@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>test</title>
 </head>
 <body>
-<a href="/springboot/girl.JPEG">美女</a>
-<br>
-<img src="/springboot/girl.JPEG">
+<!--/*@thymesVar id="name" type="java.lang.String"*/-->
+<p th:text="'Hello！, ' + ${name} + '!'">3333</p>
+
+<form th:href="" action="/hello"></form>
 </body>
 </html>
