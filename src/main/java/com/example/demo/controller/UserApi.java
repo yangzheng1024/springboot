@@ -30,7 +30,7 @@ public class UserApi extends BaseApi {
      * @return {@link String}
      */
     @PostMapping("/register")
-    public Object register(@RequestBody String param) {
+    public Object register(@RequestBody String param) throws Exception {
         JSONObject json = JSONUtil.parseObj(param);
         String name = json.getStr("name");
         String password = json.getStr("password");
@@ -40,6 +40,7 @@ public class UserApi extends BaseApi {
         if (StringUtils.isNullOrEmpty(password)) {
             return resSuccess("1", "密码不能为空", "");
         }
+        password = md5(password);
         /* 生成主键 */
         Random rd = new Random();
         int num = rd.nextInt(99999) + 10000;
@@ -47,6 +48,7 @@ public class UserApi extends BaseApi {
         /* 封装到user对象 */
         User user = JSONUtil.toBean(json, User.class);
         user.setId(Long.valueOf(userId));
+        user.setPassword(password);
         System.out.println(userId);
         userDao.save(user);
         return resSuccess("0", "成功", "");
