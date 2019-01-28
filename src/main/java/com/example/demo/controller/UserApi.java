@@ -8,9 +8,10 @@ import com.example.demo.po.User;
 import com.mysql.cj.util.StringUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.Random;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 用户页面
@@ -34,24 +35,23 @@ public class UserApi extends BaseApi {
         JSONObject json = JSONUtil.parseObj(param);
         String name = json.getStr("name");
         String password = json.getStr("password");
+        /* 参数判空 */
         if (StringUtils.isNullOrEmpty(name)) {
             return resSuccess("1", "用户名不能为空", "");
         }
         if (StringUtils.isNullOrEmpty(password)) {
             return resSuccess("1", "密码不能为空", "");
         }
+        // 加密密码
         password = md5(password);
-        /* 生成主键 */
-        Random rd = new Random();
-        int num = rd.nextInt(99999) + 10000;
-        String userId = System.currentTimeMillis() + String.valueOf(num);
+        // 生成主键
+        String userId = getUserId();
         /* 封装到user对象 */
         User user = JSONUtil.toBean(json, User.class);
         user.setId(Long.valueOf(userId));
         user.setPassword(password);
-        System.out.println(userId);
-        userDao.save(user);
-        return resSuccess("0", "成功", "");
+        Long id = userDao.save(user).getId();
+        return resSuccess("0", "成功", JSONUtil.createObj().put("userId", id));
     }
 
     /**
