@@ -1,11 +1,11 @@
 package com.example.demo.controller;
 
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.example.demo.dao.UserDao;
 import com.example.demo.global.BaseApi;
 import com.example.demo.po.User;
-import com.mysql.cj.util.StringUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,10 +36,10 @@ public class UserApi extends BaseApi {
         String name = json.getStr("name");
         String password = json.getStr("password");
         /* 参数判空 */
-        if (StringUtils.isNullOrEmpty(name)) {
+        if (StrUtil.isEmpty(name)) {
             return resSuccess("1", "用户名不能为空", "");
         }
-        if (StringUtils.isNullOrEmpty(password)) {
+        if (StrUtil.isEmpty(password)) {
             return resSuccess("1", "密码不能为空", "");
         }
         // 加密密码
