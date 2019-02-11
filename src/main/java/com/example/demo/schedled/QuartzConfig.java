@@ -14,7 +14,7 @@ import java.util.Date;
  */
 @Configuration
 @AllArgsConstructor(onConstructor = @__(@Autowired))
-public class QuartzScheduler {
+public class QuartzConfig {
 
     /**
      * 任务调度
