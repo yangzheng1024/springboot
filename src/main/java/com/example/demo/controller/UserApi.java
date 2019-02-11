@@ -6,24 +6,18 @@ import cn.hutool.json.JSONUtil;
 import com.example.demo.dao.UserDao;
 import com.example.demo.global.BaseApi;
 import com.example.demo.po.User;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 用户页面
  *
  * @author 杨正
  */
-@Api(description = "用户信息")
 @RestController
+@Api(tags = "测试类")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class UserApi extends BaseApi {
 
@@ -35,10 +29,10 @@ public class UserApi extends BaseApi {
      * @param param 用户信息
      * @return {@link String}
      */
-    @ApiOperation(value = "新增用户", notes = "新增注册")
-    @ApiImplicitParams({
+    @ApiOperation("新增用户")
+    /*@ApiImplicitParams({
             @ApiImplicitParam(name = "userId", value = "用户标识", required = true, paramType = "query", dataType = "String")
-    })
+    })*/
     @PostMapping("/register")
     public Object register(@RequestBody String param) throws Exception {
         JSONObject json = JSONUtil.parseObj(param);
@@ -63,14 +57,11 @@ public class UserApi extends BaseApi {
         return resSuccess("0", "成功", JSONUtil.createObj().put("userId", id));
     }
 
-    /**
-     * 测试function
-     *
-     * @return {@link String}
-     */
-    @RequestMapping("/hello")
-    public String test01() {
-        return "hello world!";
+    @ApiOperation(value="【PC端】提交订单", notes="提交一组识别的标签id，返回生成的订单详情")
+    @RequestMapping(value = "/test/{id}", method = RequestMethod.POST, produces  = "application/json;charset=UTF-8")
+    public Integer test(@PathVariable Integer id){
+        System.out.println(id);
+        return id;
     }
 
 }
