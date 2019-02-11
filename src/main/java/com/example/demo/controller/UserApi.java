@@ -6,6 +6,10 @@ import cn.hutool.json.JSONUtil;
 import com.example.demo.dao.UserDao;
 import com.example.demo.global.BaseApi;
 import com.example.demo.po.User;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author 杨正
  */
+@Api(description = "用户信息")
 @RestController
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class UserApi extends BaseApi {
@@ -30,6 +35,10 @@ public class UserApi extends BaseApi {
      * @param param 用户信息
      * @return {@link String}
      */
+    @ApiOperation(value = "新增用户", notes = "新增注册")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId", value = "用户标识", required = true, paramType = "query", dataType = "String")
+    })
     @PostMapping("/register")
     public Object register(@RequestBody String param) throws Exception {
         JSONObject json = JSONUtil.parseObj(param);
