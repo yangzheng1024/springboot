@@ -53,3 +53,6 @@
                 //调用
                 goodInfoMapper.from(goodBean,goodTypeBean);
 ```
+
+#### 2.springboot整合任务调度框架quartz
+
