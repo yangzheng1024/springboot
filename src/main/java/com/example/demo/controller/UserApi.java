@@ -30,9 +30,9 @@ public class UserApi extends BaseApi {
      * @return {@link String}
      */
     @ApiOperation("新增用户")
-    /*@ApiImplicitParams({
+    @ApiImplicitParams({
             @ApiImplicitParam(name = "userId", value = "用户标识", required = true, paramType = "query", dataType = "String")
-    })*/
+    })
     @PostMapping("/register")
     public Object register(@RequestBody String param) throws Exception {
         JSONObject json = JSONUtil.parseObj(param);

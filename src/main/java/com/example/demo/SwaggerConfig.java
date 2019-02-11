@@ -26,7 +26,7 @@ public class SwaggerConfig {
                 .groupName("")
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.....web"))
+                .apis(RequestHandlerSelectors.basePackage("com.example.demo"))
                 .paths(PathSelectors.any())
                 .build();
     }
